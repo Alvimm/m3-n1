@@ -4,17 +4,46 @@
  */
 package cadastropoo;
 
+import model.PessoaFisica;
+import model.PessoaFisicaRepo;
+import model.PessoaJuridica;
+import model.PessoaJuridicaRepo;
+import java.io.IOException;
+
 /**
  *
  * @author Filipe
  */
 public class CadastroPOO {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        PessoaFisicaRepo repo1 = new PessoaFisicaRepo();
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+        repo1.inserir(new PessoaFisica(1, "Filipe", "123.456.789-10", 26));
+        repo1.inserir(new PessoaFisica(2, "Daniel", "817.627.188-88", 30));
+
+        repo1.persistir("pessoasFisicas.dat");
+        System.out.println("Pessoas físicas armazenadas");
+
+        PessoaFisicaRepo repo2 = new PessoaFisicaRepo();
+        repo2.recuperar("pessoasFisicas.dat");
+        System.out.println("Pessoas físicas recuperadas:");
+        for (PessoaFisica pessoaFisica : repo2.obterTodos()){
+            pessoaFisica.exibir();
+        }
+
+        PessoaJuridicaRepo repo3 = new PessoaJuridicaRepo();
+
+        repo3.inserir(new PessoaJuridica(1, "Multinacional Alemã", "12.345.678/0000-01"));
+        repo3.inserir(new PessoaJuridica(2, "Multinacional Francesa", "12.345.678/0000-02"));
+
+        repo3.persistir("pessoasJuridicas.dat");
+        System.out.println("Pessoas jurídicas armazenadas");
+
+        PessoaJuridicaRepo repo4 = new PessoaJuridicaRepo();
+        repo4.recuperar("pessoasJuridicas.dat");
+        System.out.println("Pessoas jurídicas recuperadas:");
+        for (PessoaJuridica pessoaJuridica : repo4.obterTodos()){
+            pessoaJuridica.exibir();
+        }
     }
-    
 }
