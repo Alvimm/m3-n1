@@ -1,8 +1,17 @@
-package model;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package model.gerenciadores;
 
+import model.entidades.PessoaFisica;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Filipe
+ */
 public class PessoaFisicaRepo {
     private ArrayList<PessoaFisica> pessoasFisicasLista = new ArrayList<>();
 
@@ -28,13 +37,15 @@ public class PessoaFisicaRepo {
         }
     };
 
-    public PessoaFisica obter(int id){
-        PessoaFisica pessoaFisica = new PessoaFisica();
-        if(pessoaFisica.getId() == id){
-            return pessoaFisica;
+
+    public PessoaFisica obter(int Id) {
+        for (PessoaFisica pessoa : pessoasFisicasLista) {
+            if (pessoa.getId() == Id) {
+                return pessoa;
+            }
         }
         return null;
-    };
+    }
 
     public ArrayList<PessoaFisica> obterTodos(){
         return pessoasFisicasLista;

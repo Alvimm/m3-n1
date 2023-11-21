@@ -4,7 +4,7 @@
     <option name="jreName" value="JDK17" />
     <option name="vmOptions" value="-Dspring.output.ansi.enabled=ALWAYS" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="JDK17" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

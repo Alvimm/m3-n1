@@ -4,10 +4,10 @@
  */
 package cadastropoo;
 
-import model.PessoaFisica;
-import model.PessoaFisicaRepo;
-import model.PessoaJuridica;
-import model.PessoaJuridicaRepo;
+import model.entidades.PessoaFisica;
+import model.gerenciadores.PessoaFisicaRepo;
+import model.entidades.PessoaJuridica;
+import model.gerenciadores.PessoaJuridicaRepo;
 import java.io.IOException;
 
 /**

@@ -1,7 +1,7 @@
-import model.PessoaFisica;
-import model.PessoaFisicaRepo;
-import model.PessoaJuridica;
-import model.PessoaJuridicaRepo;
+import model.entidades.PessoaFisica;
+import model.gerenciadores.PessoaFisicaRepo;
+import model.entidades.PessoaJuridica;
+import model.gerenciadores.PessoaJuridicaRepo;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ public class CadastroPOO {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        String arquivoPessoas = "pessoas";
+        String arquivoPrefixo = "pessoas";
 
         PessoaFisicaRepo repoPessoaFisica = new PessoaFisicaRepo();
         PessoaJuridicaRepo repoPessoaJuridica = new PessoaJuridicaRepo();
@@ -40,10 +40,10 @@ public class CadastroPOO {
                     exibirTodasPessoas(repoPessoaFisica, repoPessoaJuridica);
                     break;
                 case 6:
-                    salvarDados(arquivoPessoas, repoPessoaFisica, repoPessoaJuridica);
+                    salvarDados(arquivoPrefixo, repoPessoaFisica, repoPessoaJuridica);
                     break;
                 case 7:
-                    recuperarDados(arquivoPessoas, repoPessoaFisica, repoPessoaJuridica);
+                    recuperarDados(arquivoPrefixo, repoPessoaFisica, repoPessoaJuridica);
                     break;
                 case 0:
                     System.out.println("Saindo do programa.");
@@ -107,7 +107,7 @@ public class CadastroPOO {
             System.out.println("Tipo inválido.");
         }
     }
-
+    
     private static void alterarPessoa(PessoaFisicaRepo repoPessoaFisica, PessoaJuridicaRepo repoPessoaJuridica) {
         System.out.println("Escolha o tipo (Física - 1 / Jurídica - 2): ");
         int tipo = scanner.nextInt();
@@ -243,145 +243,28 @@ public class CadastroPOO {
             System.out.println("Erro ao salvar os dados.");
         }
     }
-
-    private static void recuperarDados(String arquivoPrefixo, PessoaFisicaRepo repoPessoaFisica, PessoaJuridicaRepo repoPessoaJuridica) {
+    
+    public static void recuperarDados(String arquivoPrefixo, PessoaFisicaRepo repoPessoaFisica, PessoaJuridicaRepo repoPessoaJuridica) {
+        System.out.println("Digite o nome do arquivo a ser carregado: ");
+        String prefixo = scanner.nextLine();
         try {
-            System.out.println("Digite o prefixo dos arquivos: ");
-            String prefixo = scanner.nextLine();
-            repoPessoaFisica.recuperar(arquivoPrefixo + prefixo + ".fisica.bin");
-            repoPessoaJuridica.recuperar(arquivoPrefixo + prefixo + ".juridica.bin");
-            System.out.println("Dados recuperados com sucesso.");
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Erro ao recuperar os dados.");
+            repoPessoaFisica.recuperar(prefixo + "fisica.bin");
+        } catch (IOException | ClassNotFoundException ex) {
+            System.out.println("Não foi possivel ler o arquivo de pessoa fisica informado. ");
+            return;
         }
-    }
 
+        try {
+            repoPessoaJuridica.recuperar(prefixo + "juridica.bin");
+        } catch (IOException | ClassNotFoundException ex) {
+            System.out.println("Não foi possivel ler o arquivo de pessoa juridica informado. ");
+            return;
+        }
+
+        System.out.println("Aquivo recuperado com sucesso! ");
+    }
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        PessoaFisicaRepo pessoaFisicaRepo = new PessoaFisicaRepo();
-//        PessoaJuridicaRepo pessoaJuridicaRepo = new PessoaJuridicaRepo();
-//        Scanner input = new Scanner(System.in);
-//
-//        System.out.println("===========================================================" +
-//                "\n1 - Incluir Pessoa" +
-//                "\n2 - Alterar Pessoa" +
-//                "\n3 - Excluir Pessoa" +
-//                "\n4 - Buscar pelo ID" +
-//                "\n5 - Exibir todos" +
-//                "\n6 - Persistir dados" +
-//                "\n7 - Recuperar dados" +
-//                "\n0 - Finalizar programa" +
-//                "\n===========================================================");
-//
-//        int opcao = input.nextInt();
-//        input.nextLine();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- //   }
-//        PessoaFisicaRepo repo1 = new PessoaFisicaRepo();
-//
-//        repo1.inserir(new PessoaFisica(1, "Filipe", "123.456.789-10", 26));
-//        repo1.inserir(new PessoaFisica(2, "Daniel", "817.627.188-88", 30));
-//
-//        repo1.persistir("pessoasFisicas.dat");
-//        System.out.println("Pessoas físicas armazenadas");
-//
-//        PessoaFisicaRepo repo2 = new PessoaFisicaRepo();
-//        repo2.recuperar("pessoasFisicas.dat");
-//        System.out.println("Pessoas físicas recuperadas:");
-//        for (PessoaFisica pessoaFisica : repo2.obterTodos()){
-//            pessoaFisica.exibir();
-//        }
-//
-//        PessoaJuridicaRepo repo3 = new PessoaJuridicaRepo();
-//
-//        repo3.inserir(new PessoaJuridica(1, "Multinacional Alemã", "12.345.678/0000-01"));
-//        repo3.inserir(new PessoaJuridica(2, "Multinacional Francesa", "12.345.678/0000-02"));
-//
-//        repo3.persistir("pessoasJuridicas.dat");
-//        System.out.println("Pessoas jurídicas armazenadas");
-//
-//        PessoaJuridicaRepo repo4 = new PessoaJuridicaRepo();
-//        repo4.recuperar("pessoasJuridicas.dat");
-//        System.out.println("Pessoas jurídicas recuperadas:");
-//        for (PessoaJuridica pessoaJuridica : repo4.obterTodos()){
-//            pessoaJuridica.exibir();
-//        }
-//    }
 
 

@@ -1,7 +1,18 @@
-package model;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package model.gerenciadores;
 
+import model.entidades.PessoaJuridica;
 import java.io.*;
 import java.util.ArrayList;
+
+/**
+ *
+ * @author Filipe
+ */
+
 
 public class PessoaJuridicaRepo {
     private ArrayList<PessoaJuridica> pessoasJuridicasLista = new ArrayList<>();
